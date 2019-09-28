@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./general-info.component.scss']
 })
 export class GeneralInfoComponent implements OnInit {
+  displayedColumns: string[] = ['intervention_date', 'anomaly'];
 
-  constructor() { }
+  dataSource = [
+    { intervention_date: '1569521130', anomaly: 16257 },
+    { intervention_date: '1569434730', anomaly: 12332 },
+    { intervention_date: '1566842730', anomaly: 13221 }
+  ];
 
-  ngOnInit() {
-  }
+  constructor() {}
 
+  ngOnInit() {}
 }
