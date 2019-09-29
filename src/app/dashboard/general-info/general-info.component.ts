@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { filter, tap } from 'rxjs/operators';
 import { InterventionSelect } from 'src/app/core/actions/interventions.actions';
 import { Asset } from 'src/app/core/models/asset.model';
 import { Intervention } from 'src/app/core/models/intervention.model';
@@ -23,7 +23,10 @@ export class GeneralInfoComponent implements OnInit {
 
   constructor(private store: Store<AppState>) {
     this.asset$ = this.store.select('asset');
-    this.interventions$ = this.store.select('interventions');
+    this.interventions$ = this.store.select('interventions').pipe(
+      filter(interventions => interventions && interventions.length > 0),
+      tap(interventions => this.selectIntervention(interventions[0]))
+    );
 
     this.store
       .select('selectedIntervention')
