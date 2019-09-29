@@ -10,7 +10,7 @@
   <ng-container matColumnDef="intervention_date">
     <th mat-header-cell *matHeaderCellDef>Intervention date</th>
     <td mat-cell *matCellDef="let intervention">
-      <span class="date">{{ intervention.date.toDate() | date: 'dd-MM-yyyy' }}</span>
+      <span class="date">{{ intervention.date.toDate() | date: 'dd/MM/yyyy' }}</span>
     </td>
   </ng-container>
 
@@ -23,7 +23,9 @@
   <!-- Anomaly criticity Column -->
   <ng-container matColumnDef="anomaly_criticiy">
     <th mat-header-cell *matHeaderCellDef>Anomaly criticity</th>
-    <td mat-cell *matCellDef="let intervention">#{{ intervention.anomaly.criticity }}</td>
+    <td mat-cell *matCellDef="let intervention">
+      <span class="criticity">{{ intervention.anomaly.criticity }}</span>
+    </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
