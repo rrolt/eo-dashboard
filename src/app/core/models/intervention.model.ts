@@ -9,4 +9,10 @@ export interface Anomaly {
   ref: string;
   criticity: number;
   status: string;
+  indicator: Indicator;
+}
+
+export interface Indicator {
+  name: string;
+  icon: string;
 }

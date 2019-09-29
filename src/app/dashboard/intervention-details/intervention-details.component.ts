@@ -3,10 +3,12 @@ import { AppState } from 'src/app/core/models/state.model';
 import { Store } from '@ngrx/store';
 import { Intervention } from 'src/app/core/models/intervention.model';
 import { Observable, merge } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, filter, switchMap } from 'rxjs/operators';
 import { Asset } from 'src/app/core/models/asset.model';
 import { AssetService } from 'src/app/core/services/asset.service';
 import { MatSliderChange } from '@angular/material/slider';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { IndicatorModalComponent } from './indicator-modal/indicator-modal.component';
 
 @Component({
   selector: 'dashboard-intervention-details',
@@ -25,7 +27,7 @@ export class InterventionDetailsComponent implements OnInit {
     { name: 'resolved', color: '#41b771' }
   ];
 
-  constructor(private store: Store<AppState>, private assetService: AssetService) {
+  constructor(private store: Store<AppState>, private assetService: AssetService, private dialog: MatDialog) {
     merge(this.getAsset(), this.getIntervention()).subscribe();
   }
 
@@ -33,16 +35,30 @@ export class InterventionDetailsComponent implements OnInit {
 
   onStatusChange(status: string) {
     this.intervention.anomaly.status = status;
-    this.assetService.updateIntervention(this.asset, this.intervention);
+    this.updateIntervention();
   }
 
   onCriticityChange(event: MatSliderChange) {
     this.intervention.anomaly.criticity = event.value;
-    this.assetService.updateIntervention(this.asset, this.intervention);
+    this.updateIntervention();
   }
 
   formatSatusName(name: string): string {
     return name.replace(/_/g, ' ');
+  }
+
+  openIndicatorModal() {
+    this.dialog
+      .open(IndicatorModalComponent, {
+        width: '250px'
+      })
+      .afterClosed()
+      .pipe(
+        filter(confirmed => confirmed),
+        tap(indicator => (this.intervention.anomaly.indicator = indicator)),
+        tap(() => this.updateIntervention())
+      )
+      .subscribe();
   }
 
   private getAsset(): Observable<Asset> {
@@ -53,6 +69,10 @@ export class InterventionDetailsComponent implements OnInit {
     return this.store
       .select('selectedIntervention')
       .pipe(tap(selectedIntervention => (this.intervention = selectedIntervention)));
+  }
+
+  private updateIntervention() {
+    this.assetService.updateIntervention(this.asset, this.intervention);
   }
 }
 

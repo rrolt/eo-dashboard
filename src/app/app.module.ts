@@ -10,6 +10,8 @@ import { interventionsReducer } from './core/reducers/interventions.reducer';
 import { selectedInterventionReducer } from './core/reducers/selected-intervention.reducer';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { HeaderModule } from './header/header.module';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { fas } from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,9 +25,14 @@ import { HeaderModule } from './header/header.module';
       asset: assetReducer,
       interventions: interventionsReducer,
       selectedIntervention: selectedInterventionReducer
-    })
+    }),
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+  constructor(library: FaIconLibrary) {
+    library.addIconPacks(fas);
+  }
+}
