@@ -1,0 +1,37 @@
+div.header {
+  margin-bottom: 10px;
+
+  mat-icon {
+    display: inline-block;
+    border-radius: 30px;
+    padding: 8px;
+    background: #85b6da;
+  }
+
+  span {
+    position: relative;
+    top: -7px;
+    left: 8px;
+    font-size: 16px;
+  }
+}
+
+mat-card-content {
+  section {
+    display: flex;
+    padding: 20px;
+
+    span.label {
+      font-weight: 500;
+      margin-right: 25px;
+      width: 280px;
+
+      &:after {
+        content: ':';
+      }
+    }
+
+    div.content {
+    }
+  }
+}

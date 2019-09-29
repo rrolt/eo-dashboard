@@ -1,0 +1,9 @@
+:host {
+  display: flex;
+  justify-content: space-between;
+}
+
+dashboard-general-info,
+dashboard-intervention-details {
+  width: 48%;
+}

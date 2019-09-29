@@ -5,7 +5,8 @@ div.asset-image {
   flex-shrink: 0;
   object-fit: cover;
   background-size: cover;
-  background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9BTZNXEcrnAWXc1JzRHFAQUB99ppSXZOO9Rvueu2aS8vKYoQZ);
+  background-position: center;
+  margin-right: 10px;
 }
 
 section.asset-title {

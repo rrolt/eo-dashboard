@@ -1,0 +1,20 @@
+<mat-card class="example-card" *ngIf="intervention$ | async as intervention">
+  <div class="header">
+    <mat-icon>build</mat-icon>
+    <span
+      >Intervention from <strong>{{ intervention.date.toDate() | date: 'dd-MM-yyyy' }}</strong></span
+    >
+  </div>
+  <mat-divider></mat-divider>
+  <mat-card-content>
+    <section>
+      <span class="label">Summary</span>
+      <div class="content">{{ intervention.summary }}</div>
+    </section>
+    <mat-divider></mat-divider>
+    <section>
+      <span class="label">Anomaly status</span>
+      <div class="content"><div dashboardAnomalyStatus [status]="intervention.anomaly.status"></div></div>
+    </section>
+  </mat-card-content>
+</mat-card>

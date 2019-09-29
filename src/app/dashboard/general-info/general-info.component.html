@@ -1,5 +1,5 @@
 <section class="asset-title" *ngIf="asset$ | async as asset">
-  <div class="asset-image"></div>
+  <div class="asset-image" [ngStyle]="{ 'background-image': 'url(' + asset.image + ')' }"></div>
   <h2>
     {{ asset.name }} <span>{{ asset.clientName }}</span>
   </h2>
@@ -17,7 +17,7 @@
   <!-- Anomaly Column -->
   <ng-container matColumnDef="anomaly">
     <th mat-header-cell *matHeaderCellDef>Anomaly</th>
-    <td mat-cell *matCellDef="let intervention">#{{ intervention.anomaly }}</td>
+    <td mat-cell *matCellDef="let intervention">#{{ intervention.anomaly.ref }}</td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
