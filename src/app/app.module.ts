@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { assetReducer } from './core/reducers/asset.reducer';
 import { interventionsReducer } from './core/reducers/interventions.reducer';
+import { selectedInterventionReducer } from './core/reducers/selected-intervention.reducer';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { HeaderModule } from './header/header.module';
 
@@ -18,7 +19,11 @@ import { HeaderModule } from './header/header.module';
     BrowserAnimationsModule,
     HeaderModule,
     DashboardModule,
-    StoreModule.forRoot({ asset: assetReducer, interventions: interventionsReducer })
+    StoreModule.forRoot({
+      asset: assetReducer,
+      interventions: interventionsReducer,
+      selectedIntervention: selectedInterventionReducer
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

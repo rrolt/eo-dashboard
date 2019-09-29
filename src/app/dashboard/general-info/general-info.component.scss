@@ -42,4 +42,24 @@ table {
     -moz-border-radius: 5px;
     border-radius: 5px;
   }
+
+  tr:not(.mat-header-row) {
+    cursor: pointer;
+
+    &:hover {
+      background: #f1f1f1;
+    }
+
+    &.selected {
+      background: #24292d;
+
+      span.date {
+        background: #85b6da;
+      }
+
+      .mat-cell {
+        color: #fff;
+      }
+    }
+  }
 }

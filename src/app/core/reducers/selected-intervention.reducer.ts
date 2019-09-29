@@ -1,9 +1,9 @@
 import { InterventionsActions, InterventionsTypes } from '../actions/interventions.actions';
 import { Intervention } from '../models/intervention.model';
 
-export function interventionsReducer(state: Intervention[], action: InterventionsActions) {
+export function selectedInterventionReducer(state: Intervention, action: InterventionsActions) {
   switch (action.type) {
-    case InterventionsTypes.UPDATE:
+    case InterventionsTypes.SELECT:
       return action.payload;
 
     default:
