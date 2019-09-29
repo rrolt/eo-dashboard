@@ -30,8 +30,35 @@ mat-card-content {
         content: ':';
       }
     }
+  }
+}
 
-    div.content {
+button[mat-menu-item] {
+  &:before {
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 24px;
+    margin-right: 8px;
+  }
+
+  &.pending,
+  &.created {
+    &:before {
+      background: #e23535;
+    }
+  }
+
+  &.in_progress {
+    &:before {
+      background: #24292d;
+    }
+  }
+
+  &.resolved {
+    &:before {
+      background: #41b771;
     }
   }
 }

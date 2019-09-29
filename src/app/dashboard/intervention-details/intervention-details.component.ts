@@ -18,15 +18,31 @@ export class InterventionDetailsComponent implements OnInit {
 
   asset: Asset;
 
+  statusList: AnomalyStatus[] = [
+    { name: 'pending', color: '#e23535' },
+    { name: 'created', color: '#e23535' },
+    { name: 'in_progress', color: '#24292d' },
+    { name: 'resolved', color: '#41b771' }
+  ];
+
   constructor(private store: Store<AppState>, private assetService: AssetService) {
     merge(this.getAsset(), this.getIntervention()).subscribe();
   }
 
   ngOnInit() {}
 
+  onStatusChange(status: string) {
+    this.intervention.anomaly.status = status;
+    this.assetService.updateIntervention(this.asset, this.intervention);
+  }
+
   onCriticityChange(event: MatSliderChange) {
     this.intervention.anomaly.criticity = event.value;
     this.assetService.updateIntervention(this.asset, this.intervention);
+  }
+
+  formatSatusName(name: string): string {
+    return name.replace(/_/g, ' ');
   }
 
   private getAsset(): Observable<Asset> {
@@ -38,4 +54,9 @@ export class InterventionDetailsComponent implements OnInit {
       .select('selectedIntervention')
       .pipe(tap(selectedIntervention => (this.intervention = selectedIntervention)));
   }
+}
+
+interface AnomalyStatus {
+  name: string;
+  color: string;
 }

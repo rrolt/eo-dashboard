@@ -6,6 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatTableModule } from '@angular/material/table';
 import { environment } from 'src/environments/environment';
@@ -26,6 +27,7 @@ import { InterventionDetailsComponent } from './intervention-details/interventio
     MatIconModule,
     MatDividerModule,
     MatSliderModule,
+    MatMenuModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule
   ],

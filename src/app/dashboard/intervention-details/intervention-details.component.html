@@ -14,7 +14,19 @@
     <mat-divider></mat-divider>
     <section>
       <span class="label">Anomaly status</span>
-      <div class="content"><div dashboardAnomalyStatus [status]="intervention.anomaly.status"></div></div>
+      <div class="content">
+        <button [matMenuTriggerFor]="statusMenu" dashboardAnomalyStatus [status]="intervention.anomaly.status"></button>
+        <mat-menu #statusMenu="matMenu">
+          <button
+            *ngFor="let status of statusList"
+            mat-menu-item
+            [ngClass]="status.name"
+            (click)="onStatusChange(status.name)"
+          >
+            <span>{{ formatSatusName(status.name) }}</span>
+          </button>
+        </mat-menu>
+      </div>
     </section>
     <mat-divider></mat-divider>
     <section>

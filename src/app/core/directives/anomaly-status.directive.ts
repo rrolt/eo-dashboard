@@ -14,11 +14,20 @@ export class AnomalyStatusDirective {
   private setStyle(value: string) {
     this.el.nativeElement.style.padding = '5px';
     this.el.nativeElement.style.borderRadius = '5px';
+    this.el.nativeElement.style.border = 'none';
+    this.el.nativeElement.style.font = 'inherit';
+    this.el.nativeElement.style.outline = 'inherit';
+    this.el.nativeElement.style.cursor = 'pointer';
 
     let color: string, background: string;
 
     switch (value) {
-      case 'pending' || 'created':
+      case 'created':
+        background = '#e23535';
+        color = '#fff';
+        break;
+
+      case 'pending':
         background = '#e23535';
         color = '#fff';
         break;
