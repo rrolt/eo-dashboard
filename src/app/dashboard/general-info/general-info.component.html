@@ -1,11 +1,11 @@
-<section class="asset-title" *ngIf="asset">
+<section class="asset-title" *ngIf="asset$ | async as asset">
   <div class="asset-image"></div>
   <h2>
     {{ asset.name }} <span>{{ asset.clientName }}</span>
   </h2>
 </section>
 
-<table mat-table [dataSource]="interventions" class="mat-elevation-z8">
+<table mat-table [dataSource]="interventions$ | async" class="mat-elevation-z8">
   <!-- Intervention Date Column -->
   <ng-container matColumnDef="intervention_date">
     <th mat-header-cell *matHeaderCellDef>Intervention date</th>

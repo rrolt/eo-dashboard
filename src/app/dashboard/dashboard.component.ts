@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Asset } from '../core/models/asset.model';
+import { Store } from '@ngrx/store';
+import { flatMap, tap } from 'rxjs/operators';
+
+import { AssetUpdate } from '../core/actions/asset.actions';
+import { InterventionsUpdate } from '../core/actions/interventions.actions';
+import { AppState } from '../core/models/state.model';
 import { AssetService } from '../core/services/asset.service';
-import { tap, switchMap, flatMap } from 'rxjs/operators';
-import { Intervention } from '../core/models/intervention.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,17 +13,13 @@ import { Intervention } from '../core/models/intervention.model';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  asset: Asset;
-
-  interventions: Intervention[] = [];
-
-  constructor(private assetService: AssetService) {
+  constructor(private store: Store<AppState>, private assetService: AssetService) {
     this.assetService
       .getAsset('AObU2bC4aMC99JrE0c5R')
+      .pipe(tap(asset => this.store.dispatch(new AssetUpdate(asset))))
       .pipe(
-        tap(asset => (this.asset = asset)),
         flatMap(() => this.assetService.getInterventionsFromAsset('AObU2bC4aMC99JrE0c5R')),
-        tap(interventions => (this.interventions = interventions))
+        tap(interventions => this.store.dispatch(new InterventionsUpdate(interventions)))
       )
       .subscribe();
   }

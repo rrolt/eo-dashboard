@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { AssetService } from 'src/app/core/services/asset.service';
-import { Asset } from 'src/app/core/models/asset.model';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { Asset } from 'src/app/core/models/asset.model';
 import { Intervention } from 'src/app/core/models/intervention.model';
+import { AppState } from 'src/app/core/models/state.model';
 
 @Component({
   selector: 'dashboard-general-info',
@@ -10,15 +11,16 @@ import { Intervention } from 'src/app/core/models/intervention.model';
   styleUrls: ['./general-info.component.scss']
 })
 export class GeneralInfoComponent implements OnInit {
-  @Input() asset: Asset;
-
-  @Input() interventions: Intervention[];
-
-  displayedColumns: string[] = ['intervention_date', 'anomaly'];
+  asset$: Observable<Asset>;
 
   interventions$: Observable<Intervention[]>;
 
-  constructor() {}
+  displayedColumns: string[] = ['intervention_date', 'anomaly'];
+
+  constructor(private store: Store<AppState>) {
+    this.asset$ = this.store.select('asset');
+    this.interventions$ = this.store.select('interventions');
+  }
 
   ngOnInit() {}
 }
