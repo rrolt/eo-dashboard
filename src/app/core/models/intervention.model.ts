@@ -1,5 +1,6 @@
 export interface Intervention {
-  date: Date;
+  id: string;
+  date: any;
   summary: string;
   anomaly: Anomaly;
 }

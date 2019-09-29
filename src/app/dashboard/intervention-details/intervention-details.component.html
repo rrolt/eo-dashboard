@@ -1,4 +1,4 @@
-<mat-card class="example-card" *ngIf="intervention$ | async as intervention">
+<mat-card class="example-card" *ngIf="intervention">
   <div class="header">
     <mat-icon>build</mat-icon>
     <span
@@ -15,6 +15,22 @@
     <section>
       <span class="label">Anomaly status</span>
       <div class="content"><div dashboardAnomalyStatus [status]="intervention.anomaly.status"></div></div>
+    </section>
+    <mat-divider></mat-divider>
+    <section>
+      <span class="label">Anomaly criticity</span>
+      <div class="content">
+        <mat-slider
+          class="example-margin"
+          [max]="100"
+          [min]="1"
+          [step]="1"
+          [thumbLabel]="true"
+          [value]="intervention.anomaly.criticity"
+          (change)="onCriticityChange($event)"
+        >
+        </mat-slider>
+      </div>
     </section>
   </mat-card-content>
 </mat-card>

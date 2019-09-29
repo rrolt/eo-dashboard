@@ -19,7 +19,7 @@ export class GeneralInfoComponent implements OnInit {
 
   selectedIntervention: Intervention;
 
-  displayedColumns: string[] = ['intervention_date', 'anomaly'];
+  displayedColumns: string[] = ['intervention_date', 'anomaly_ref', 'anomaly_criticiy'];
 
   constructor(private store: Store<AppState>) {
     this.asset$ = this.store.select('asset');

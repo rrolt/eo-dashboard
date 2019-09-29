@@ -14,10 +14,16 @@
     </td>
   </ng-container>
 
-  <!-- Anomaly Column -->
-  <ng-container matColumnDef="anomaly">
-    <th mat-header-cell *matHeaderCellDef>Anomaly</th>
+  <!-- Anomaly reference Column -->
+  <ng-container matColumnDef="anomaly_ref">
+    <th mat-header-cell *matHeaderCellDef>Anomaly reference</th>
     <td mat-cell *matCellDef="let intervention">#{{ intervention.anomaly.ref }}</td>
+  </ng-container>
+
+  <!-- Anomaly criticity Column -->
+  <ng-container matColumnDef="anomaly_criticiy">
+    <th mat-header-cell *matHeaderCellDef>Anomaly criticity</th>
+    <td mat-cell *matCellDef="let intervention">#{{ intervention.anomaly.criticity }}</td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

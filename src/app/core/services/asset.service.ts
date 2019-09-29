@@ -17,6 +17,16 @@ export class AssetService {
     return this.getInterventionsCollection(code).valueChanges();
   }
 
+  updateIntervention(asset: Asset, intervention: Intervention): Promise<void> {
+    console.log(intervention);
+    return this.db
+      .collection('assets')
+      .doc(asset.id)
+      .collection('interventions')
+      .doc(intervention.id)
+      .set(intervention);
+  }
+
   private getAssetDocument(code: string): AngularFirestoreDocument<Asset> {
     return this.db.collection('assets').doc(code);
   }
