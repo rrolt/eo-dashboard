@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
@@ -12,7 +12,7 @@ import { AppState } from 'src/app/core/models/state.model';
   templateUrl: './general-info.component.html',
   styleUrls: ['./general-info.component.scss']
 })
-export class GeneralInfoComponent implements OnInit {
+export class GeneralInfoComponent {
   asset$: Observable<Asset>;
 
   interventions$: Observable<Intervention[]>;
@@ -23,9 +23,10 @@ export class GeneralInfoComponent implements OnInit {
 
   constructor(private store: Store<AppState>) {
     this.asset$ = this.store.select('asset');
+
     this.interventions$ = this.store.select('interventions').pipe(
       filter(interventions => interventions && interventions.length > 0),
-      tap(interventions => this.selectIntervention(interventions[0]))
+      tap(interventions => this.selectIntervention(this.selectedIntervention || interventions[0]))
     );
 
     this.store
@@ -33,8 +34,6 @@ export class GeneralInfoComponent implements OnInit {
       .pipe(tap(selectedIntervention => (this.selectedIntervention = selectedIntervention)))
       .subscribe();
   }
-
-  ngOnInit() {}
 
   selectIntervention(intevention: Intervention) {
     this.store.dispatch(new InterventionSelect(intevention));

@@ -17,11 +17,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { environment } from 'src/environments/environment';
 
 import { AnomalyStatusDirective } from '../core/directives/anomaly-status.directive';
-import { AssetService } from '../core/services/asset.service';
+import { FirebaseService } from '../core/services/asset.service';
 import { DashboardComponent } from './dashboard.component';
 import { GeneralInfoComponent } from './general-info/general-info.component';
 import { IndicatorModalComponent } from './intervention-details/indicator-modal/indicator-modal.component';
 import { InterventionDetailsComponent } from './intervention-details/intervention-details.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -45,10 +46,11 @@ import { InterventionDetailsComponent } from './intervention-details/interventio
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
+    FlexLayoutModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule
   ],
   entryComponents: [IndicatorModalComponent],
-  providers: [AssetService]
+  providers: [FirebaseService]
 })
 export class DashboardModule {}

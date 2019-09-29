@@ -33,6 +33,6 @@
     mat-row
     *matRowDef="let row; columns: displayedColumns"
     (click)="selectIntervention(row)"
-    [class.selected]="selectedIntervention"
+    [class.selected]="selectedIntervention.id === row.id"
   ></tr>
 </table>

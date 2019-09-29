@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { AppState } from 'src/app/core/models/state.model';
-import { Store } from '@ngrx/store';
-import { Intervention } from 'src/app/core/models/intervention.model';
-import { Observable, merge } from 'rxjs';
-import { tap, filter, switchMap } from 'rxjs/operators';
-import { Asset } from 'src/app/core/models/asset.model';
-import { AssetService } from 'src/app/core/services/asset.service';
+import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSliderChange } from '@angular/material/slider';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Store } from '@ngrx/store';
+import { merge, Observable } from 'rxjs';
+import { filter, tap } from 'rxjs/operators';
+import { Asset } from 'src/app/core/models/asset.model';
+import { Intervention } from 'src/app/core/models/intervention.model';
+import { AppState } from 'src/app/core/models/state.model';
+import { FirebaseService } from 'src/app/core/services/asset.service';
+
 import { IndicatorModalComponent } from './indicator-modal/indicator-modal.component';
 
 @Component({
@@ -15,7 +16,7 @@ import { IndicatorModalComponent } from './indicator-modal/indicator-modal.compo
   templateUrl: './intervention-details.component.html',
   styleUrls: ['./intervention-details.component.scss']
 })
-export class InterventionDetailsComponent implements OnInit {
+export class InterventionDetailsComponent {
   intervention: Intervention;
 
   asset: Asset;
@@ -27,11 +28,9 @@ export class InterventionDetailsComponent implements OnInit {
     { name: 'resolved', color: '#41b771' }
   ];
 
-  constructor(private store: Store<AppState>, private assetService: AssetService, private dialog: MatDialog) {
+  constructor(private store: Store<AppState>, private firebase: FirebaseService, private dialog: MatDialog) {
     merge(this.getAsset(), this.getIntervention()).subscribe();
   }
-
-  ngOnInit() {}
 
   onStatusChange(status: string) {
     this.intervention.anomaly.status = status;
@@ -72,7 +71,7 @@ export class InterventionDetailsComponent implements OnInit {
   }
 
   private updateIntervention() {
-    this.assetService.updateIntervention(this.asset, this.intervention);
+    this.firebase.updateIntervention(this.asset, this.intervention);
   }
 }
 

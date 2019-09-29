@@ -6,7 +6,7 @@ import { Asset } from '../models/asset.model';
 import { Intervention } from '../models/intervention.model';
 
 @Injectable()
-export class AssetService {
+export class FirebaseService {
   constructor(private db: AngularFirestore) {}
 
   getAsset(code: string): Observable<Asset> {
