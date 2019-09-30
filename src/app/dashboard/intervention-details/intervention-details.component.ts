@@ -7,7 +7,7 @@ import { filter, tap } from 'rxjs/operators';
 import { Asset } from 'src/app/core/models/asset.model';
 import { Intervention } from 'src/app/core/models/intervention.model';
 import { AppState } from 'src/app/core/models/state.model';
-import { FirebaseService } from 'src/app/core/services/asset.service';
+import { FirebaseService } from 'src/app/core/services/firebase.service';
 
 import { IndicatorModalComponent } from './indicator-modal/indicator-modal.component';
 

@@ -37,7 +37,6 @@ table {
   margin-top: 20px;
 
   span.date {
-    background: #ececec;
     padding: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
@@ -47,7 +46,7 @@ table {
   }
 
   span.criticity {
-    background: #ececec;
+    background: #f5f5f5;
     border-radius: 24px;
     padding: 5px;
   }
@@ -60,18 +59,20 @@ table {
     }
 
     &.selected {
-      background: #24292d;
+      background: #85b6da;
 
       span.date {
-        background: #85b6da;
+        background: #0e161e;
+        color: #fff;
       }
 
       span.criticity {
         background: #e23534;
+        color: #fff;
       }
 
       .mat-cell {
-        color: #fff;
+        color: #0e161e;
       }
     }
   }

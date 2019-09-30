@@ -3,6 +3,7 @@ export interface Intervention {
   date: any;
   summary: string;
   anomaly: Anomaly;
+  kpis?: IndicatorKpis;
 }
 
 export interface Anomaly {
@@ -15,4 +16,9 @@ export interface Anomaly {
 export interface Indicator {
   name: string;
   icon: string;
+}
+
+export interface IndicatorKpis {
+  label: string;
+  value: number;
 }

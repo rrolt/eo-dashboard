@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { Asset } from '../models/asset.model';
-import { Intervention } from '../models/intervention.model';
+import { IndicatorKpis, Intervention } from '../models/intervention.model';
 
 @Injectable()
 export class FirebaseService {
@@ -17,8 +18,24 @@ export class FirebaseService {
     return this.getInterventionsCollection(code).valueChanges();
   }
 
+  getIndicatorsKpisFromAsset(code: string): Observable<IndicatorKpis[]> {
+    return this.getInterventionsFromAsset(code).pipe(
+      map(interventions => {
+        const kpis: IndicatorKpis[] = [];
+        interventions.forEach(intervention => {
+          const kpi = kpis.find(_kpi => _kpi.label.toLowerCase() === intervention.anomaly.indicator.name.toLowerCase());
+          if (kpi) {
+            kpi.value += 1;
+          } else {
+            kpis.push({ label: intervention.anomaly.indicator.name, value: 1 });
+          }
+        });
+        return kpis.sort((a, b) => b.value - a.value);
+      })
+    );
+  }
+
   updateIntervention(asset: Asset, intervention: Intervention): Promise<void> {
-    console.log(intervention);
     return this.db
       .collection('assets')
       .doc(asset.id)

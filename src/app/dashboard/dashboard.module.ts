@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -14,15 +15,16 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatTableModule } from '@angular/material/table';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ChartsModule } from 'ng2-charts';
 import { environment } from 'src/environments/environment';
 
 import { AnomalyStatusDirective } from '../core/directives/anomaly-status.directive';
-import { FirebaseService } from '../core/services/asset.service';
+import { FirebaseService } from '../core/services/firebase.service';
+import { ChartComponent } from './chart/chart.component';
 import { DashboardComponent } from './dashboard.component';
 import { GeneralInfoComponent } from './general-info/general-info.component';
 import { IndicatorModalComponent } from './intervention-details/indicator-modal/indicator-modal.component';
 import { InterventionDetailsComponent } from './intervention-details/intervention-details.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     DashboardComponent,
     InterventionDetailsComponent,
     AnomalyStatusDirective,
-    IndicatorModalComponent
+    IndicatorModalComponent,
+    ChartComponent
   ],
   imports: [
     CommonModule,
@@ -47,6 +50,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatInputModule,
     ReactiveFormsModule,
     FlexLayoutModule,
+    ChartsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule
   ],

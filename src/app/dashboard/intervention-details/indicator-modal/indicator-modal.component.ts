@@ -19,7 +19,10 @@ export class IndicatorModalComponent {
 
   private indicators: Indicator[] = [
     { name: 'Charge issue', icon: 'charging-station' },
-    { name: 'Overheat', icon: 'burn' }
+    { name: 'Overheating', icon: 'burn' },
+    { name: 'Noise', icon: 'assistive-listening-systems' },
+    { name: 'Electronic bug', icon: 'bug' },
+    { name: 'Radiation', icon: 'radiation-alt' }
   ];
 
   constructor(private dialogRef: MatDialogRef<IndicatorModalComponent>) {

@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { assetReducer } from './core/reducers/asset.reducer';
 import { interventionsReducer } from './core/reducers/interventions.reducer';
+import { KpisReducer } from './core/reducers/kpis.reducer';
 import { selectedInterventionReducer } from './core/reducers/selected-intervention.reducer';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { HeaderModule } from './header/header.module';
@@ -25,7 +26,8 @@ import { HeaderModule } from './header/header.module';
     StoreModule.forRoot({
       asset: assetReducer,
       interventions: interventionsReducer,
-      selectedIntervention: selectedInterventionReducer
+      selectedIntervention: selectedInterventionReducer,
+      kpis: KpisReducer
     })
   ],
   providers: [],
